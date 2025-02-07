@@ -17,18 +17,20 @@ sudo systemctl restart nginx
 
 # Install Node.js, NPM, and MySQL Client
 sudo apt update
-sudo apt install -y nodejs npm mysql-client
+sudo apt install nodejs npm mysql-client -y
 
 # Create a backend directory
 sudo mkdir -p /home/ubuntu/simple-backend
-
-sudo cp /home/ubuntu/server.js /home/ubuntu/simple-backend
-sudo cd /home/ubuntu/simple-backend
-
-# Initialize a Node.js project and install dependencies
+cd /home/ubuntu/simple-backend/
 npm init -y
 npm install express body-parser mysql2
 npm install cors
 
+sudo cp /home/ubuntu/server.js /home/ubuntu/simple-backend/server.js
+PRIVATE_IP="${private_ip}"
+sed -i "s/private_ip/$PRIVATE_IP/g" /home/ubuntu/simple-backend/server.js
 
+cd /home/ubuntu/simple-backend
 nohup node server.js > server.log 2>&1 &
+
+

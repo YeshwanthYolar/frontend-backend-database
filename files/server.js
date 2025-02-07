@@ -12,9 +12,9 @@ app.use(express.json());
 
 // MySQL database connection
 const db = mysql.createConnection({
-  host: '<private_ip>',  // Replace with your MySQL server IP
+  host: 'private_ip',  // Replace with your MySQL server IP
   user: 'admin',        // Replace with your MySQL username
-  password: 'your-secure-password',  // Replace with your MySQL password
+  password: 'adminpassword',  // Replace with your MySQL password
   database: 'user_data_db'  // Replace with your MySQL database name
 });
 

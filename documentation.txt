@@ -1,6 +1,6 @@
 simple project to enter userdata and store in database
 
-ceate a vpc with one public subnet and one private subnet
+create a vpc with one public subnet and one private subnet
 
 create a instance in public subnet 
 here public instance will be used to host the frontend application
@@ -8,7 +8,7 @@ which will collect the data
  
  here we are using 
  nginx to host the frontend application 
- node.js to as backend to connect frontend with MySql database
+ node.js to connect backend to frontend with MySql database
 
 below commands can be used for installing above mentioned applications and tools
  for nginx 
@@ -29,6 +29,8 @@ below commands can be used for installing above mentioned applications and tools
 	cd simple-backend
 	npm init -y
 	npm install express body-parser mysql2
+	npm install cors
+
 
 
 create a instance in private subnet 

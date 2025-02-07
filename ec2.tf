@@ -18,10 +18,11 @@ resource "aws_instance" "public_instance" {
       host        = aws_instance.public_instance.public_ip
     }
   }
+  depends_on = [ aws_instance.private_instance ]
 
-  user_data = file("frontend.sh")
-    
-  
+  user_data = templatefile("frontend.sh", {
+    private_ip = aws_instance.private_instance.private_ip
+      })
 
   tags = {
     Name = "public-instance"
@@ -34,9 +35,22 @@ resource "aws_instance" "private_instance" {
   subnet_id     = aws_subnet.private-subnet-demo-project.id
   key_name = "demo-project"
   vpc_security_group_ids = [aws_security_group.allow_all.id]
+  
+  depends_on = [ aws_route_table.private-demo-project,aws_nat_gateway.demo-project-nat ]
   user_data = file("my_sql.sh")
 
   tags = {
     Name = "private-instance"
   }
 }
+
+output "public_ip" {
+  description = "ip of public instance"
+  value = aws_instance.public_instance.public_ip
+}
+
+output "private_ip" {
+  description = "ip of private instance"
+value = aws_instance.private_instance.private_ip
+}
+
